@@ -17,6 +17,36 @@ pydantic = {extras = ["dotenv"], version = "^1.10.7"}
 asyncpg = "^0.27.0"
 
 
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+extra_standard_library="pytest"
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+known_local_folder = "src"
+skip = ["alembic", "docker", "migrations", ".venv"]
+
+[tool.black]
+line_length = 88
+skip-string-normalization = true
+force_grid_wrap = 0
+use_parentheses = true
+include_trailing_comma = true
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  | alembic
+  | docker
+  | .venv
+  | .vscode
+  | migrations
+)/
+'''
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+isort = "^5.12.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
