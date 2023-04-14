@@ -52,8 +52,7 @@ async def create_new_product(
     """
 
     colors, product_info = get_product_data_from_website(product_id.nm_id)
-    product = await product_service.create_product(product_info, colors, session)
-    return await product_service.get_product(product.nm_id, session)
+    return await product_service.create_product(product_info, colors, session)
 
 
 @router.delete('/{product_id}', status_code=status.HTTP_204_NO_CONTENT)

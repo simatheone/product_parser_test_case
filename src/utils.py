@@ -100,10 +100,3 @@ def parser_fetched_product_data(
     parsed_data['quantity'] = total_quantity
 
     return product_colors, parsed_data
-
-
-# 143715666     - many colors
-# 72575093      - many colors
-# 3639307       - many colors
-# 148286796
-# 88763139

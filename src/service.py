@@ -98,6 +98,7 @@ class ProductService:
         Returns:
         - ProductCreate: A Pydantic schema representing the newly created product.
         """
+
         db_product = self.model(**product_data_in)
         for color_name in colors:
             color = await self.get_color_by_name(color_name, session)
@@ -108,7 +109,6 @@ class ProductService:
 
         session.add(db_product)
         await session.commit()
-        await session.refresh(db_product)
         return db_product
 
     async def remove_product(self, product_id: int, session: AsyncSession) -> None:
@@ -145,6 +145,7 @@ class ProductService:
         - Union[Color, None]: The color with the specified name if it exists in the
           database, or None if it does not exist.
         """
+
         color = await session.execute(select(Color).where(Color.name == color_name))
         return color.scalars().first()
 
