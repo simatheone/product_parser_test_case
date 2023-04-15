@@ -12,10 +12,10 @@ help:
 	@echo '                                                                   '
 
 up:
-	docker compose -f docker/docker-compose.yaml up -d
+	docker compose -f docker/docker-compose.yaml up -d --build
 
 down:
-	docker compose -f docker/docker-compose.yaml down && docker network prune --force
+	docker compose -f docker/docker-compose.yaml down
 
 migrate:
 	cd docker/ && docker compose exec backend alembic upgrade head
