@@ -6,7 +6,7 @@ from pydantic import BaseSettings
 class AppSettings(BaseSettings):
     """Application settings."""
 
-    ALLOW_ORIGINS: list[str]
+    ALLOWED_ORIGINS: list[str]
     DB_ENGINE: str
     DB_NAME: str
     DB_HOST: str

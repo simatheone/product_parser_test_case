@@ -10,7 +10,7 @@ app.include_router(product_router)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.ALLOW_ORIGINS,
+    allow_origins=settings.ALLOWED_ORIGINS,
     allow_methods=(
         'HEAD',
         'OPTIONS',

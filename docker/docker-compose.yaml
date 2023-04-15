@@ -11,9 +11,6 @@ services:
     volumes:
       - postgres_parser_data:/var/lib/postgres/data
     environment:
-      - DB_HOST=${DB_HOST-postgres-db}
-      - DB_PORT=${DB_PORT-5432}
-      - DB_ENGINE=${DB_ENGINE-postgresql+asyncpg}
       - DB_NAME=${DB_NAME-app_dev}
       - POSTGRES_USER=${POSTGRES_USER-app_dev}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD-4HsnXp71Hbn0IsP}
@@ -31,7 +28,13 @@ services:
     volumes:
       - ../:/opt/app/
     environment:
-      - ALLOW_ORIGINS=${ALLOW_ORIGINS-'["http://localhost","http://localhost:8000"]'}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS-["http://localhost","http://localhost:8000"]}
+      - DB_HOST=${DB_HOST-postgres-db}
+      - DB_PORT=${DB_PORT-5432}
+      - DB_ENGINE=${DB_ENGINE-postgresql+asyncpg}
+      - DB_NAME=${DB_NAME-app_dev}
+      - POSTGRES_USER=${POSTGRES_USER-app_dev}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD-4HsnXp71Hbn0IsP}
 
 volumes:
   postgres_parser_data:
