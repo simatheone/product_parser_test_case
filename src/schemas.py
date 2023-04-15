@@ -41,7 +41,7 @@ class ProductBase(BaseModel):
     rating: NonNegativeInt
     feedbacks: NonNegativeInt
     quantity: NonNegativeInt
-    colors: list[ColorResponse]
+    colors: list[ColorResponse] | None
 
 
 class ProductCreate(ProductBase):
