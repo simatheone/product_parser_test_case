@@ -49,7 +49,7 @@ class ProductNotFound(NotFound):
     DETAIL = ErrorCodes.PRODUCT_NOT_FOUND
 
 
-class SomethingWentWrong(BadRequest):
+class SomethingWentWrong(DetailedHTTPException):
     """Exception for the case when on request to website response
     status code differs from 200.
     """

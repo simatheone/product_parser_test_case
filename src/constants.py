@@ -7,7 +7,7 @@ class ErrorCodes:
         'Check the ID of the product you are entering.'
     )
     PRODUCT_DOES_NOT_EXIST = 'Product does not exist.'
-    PRODUCT_ALREADY_EXISTS = 'Product with id already exists.'
+    PRODUCT_ALREADY_EXISTS = 'Product with this id already exists.'
     SMTH_WENT_WRONG = 'Something went wrong on requesting data from the website.'
 
 
