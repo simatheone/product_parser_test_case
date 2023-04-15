@@ -1,11 +1,12 @@
 from functools import lru_cache
 
-from pydantic import BaseSettings
+from pydantic import BaseSettings, RedisDsn
 
 
 class AppSettings(BaseSettings):
     """Application settings."""
 
+    ALLOW_ORIGINS: list[str]
     DB_ENGINE: str
     DB_NAME: str
     DB_HOST: str
@@ -15,6 +16,7 @@ class AppSettings(BaseSettings):
 
     class Config:
         env_file = '.env'
+        env_file_encoding = 'utf-8'
 
     @property
     def database_url(self) -> str:
@@ -46,6 +48,7 @@ def get_settings():
     Raises:
     - None.
     """
+
     return AppSettings()  # type: ignore
 
 
