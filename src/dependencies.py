@@ -22,7 +22,6 @@ async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
     - This function should be used as a dependency in route functions that require
     a database session.
     """
-
     async with async_session() as session:
         yield session
 
@@ -34,19 +33,20 @@ async def validate_product_exists(
 
     Args:
     - product_id (int): The ID of the product to validate.
-    - session (AsyncSession): The async SQLAlchemy session to use for database operations.
+    - session (AsyncSession): The async SQLAlchemy session to use for database
+      operations.
 
     Returns:
     - int: The product ID if it exists in the database.
 
     Raises:
-    - ProductDoesNotExist: If a product with the specified ID does not exist in the database.
+    - ProductDoesNotExist: If a product with the specified ID does not exist in the
+      database.
 
     Note:
     - This function can be used as a dependency in route functions that require
     a product validation by ID.
     """
-
     if not await product_service.get_product(product_id, session):
         raise ProductDoesNotExist()
     return product_id
@@ -55,23 +55,26 @@ async def validate_product_exists(
 async def validate_unique_product(
     product_id_in: ProductRequest, session: AsyncSession = Depends(get_async_session)
 ) -> ProductRequest:
-    """Validates that a product with the specified ID does not already exist in the database.
+    """
+    Validates that a product with the specified ID does not already exist in the
+    database.
 
     Args:
     - product_id_in (ProductRequest): The ID of the product to validate.
-    - session (AsyncSession): The async SQLAlchemy session to use for database operations.
+    - session (AsyncSession): The async SQLAlchemy session to use for database
+      operations.
 
     Returns:
     - ProductRequest: The product ID if it does not already exist in the database.
 
     Raises:
-    - ProductAlreadyExists: If a product with the specified ID already exists in the database.
+    - ProductAlreadyExists: If a product with the specified ID already exists in the
+      database.
 
     Note:
     - This function can be used as a dependency in route functions that require
     a unique product ID.
     """
-
     if await product_service.get_product(product_id_in.nm_id, session):
         raise ProductAlreadyExists()
     return product_id_in

@@ -19,7 +19,6 @@ def get_product_data_from_website(nm_id: int) -> tuple[list[str], dict[str, Any]
     Returns:
     - Result of a function `parser_fetched_product_data`.
     """
-
     fetched_product_data = fetch_product_data(nm_id)
     if not fetched_product_data:
         raise ProductNotFound()
@@ -38,7 +37,6 @@ def fetch_product_data(nm_id: int) -> dict[str, Any]:
     Raises:
     - SomethingWentWrong: If there was an error while fetching the product data.
     """
-
     request_url = URL_LINK.format(nm_id=nm_id)
     response = requests.get(request_url)
 
@@ -79,7 +77,6 @@ def parser_fetched_product_data(
             - rating (float): The rating of the product.
             - feedbacks (int): The number of feedbacks for the product.
     """
-
     parsed_data = {}
     for new_key, response_key in RESPONSE_KEY_MAPPING.items():
         field_value = fetched_product_data[response_key]

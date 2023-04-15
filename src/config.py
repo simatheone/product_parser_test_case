@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from pydantic import BaseSettings, RedisDsn
+from pydantic import BaseSettings
 
 
 class AppSettings(BaseSettings):
@@ -48,7 +48,6 @@ def get_settings():
     Raises:
     - None.
     """
-
     return AppSettings()  # type: ignore
 
 
