@@ -22,6 +22,7 @@ async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
     - This function should be used as a dependency in route functions that require
     a database session.
     """
+
     async with async_session() as session:
         yield session
 
@@ -45,6 +46,7 @@ async def validate_product_exists(
     - This function can be used as a dependency in route functions that require
     a product validation by ID.
     """
+
     if not await product_service.get_product(product_id, session):
         raise ProductDoesNotExist()
     return product_id
@@ -69,6 +71,7 @@ async def validate_unique_product(
     - This function can be used as a dependency in route functions that require
     a unique product ID.
     """
+
     if await product_service.get_product(product_id_in.nm_id, session):
         raise ProductAlreadyExists()
     return product_id_in
