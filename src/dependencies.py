@@ -5,8 +5,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.database import async_session
 from src.exceptions import ProductAlreadyExists, ProductDoesNotExist
-from src.service import product_service
 from src.schemas import ProductRequest
+from src.service import product_service
 
 
 async def get_async_session() -> AsyncGenerator[AsyncSession, None]:

@@ -6,7 +6,7 @@ from src.dependencies import (
     validate_product_exists,
     validate_unique_product,
 )
-from src.schemas import ProductResponse, ProductRequest
+from src.schemas import ProductRequest, ProductResponse
 from src.service import product_service
 from src.utils import get_product_data_from_website
 
