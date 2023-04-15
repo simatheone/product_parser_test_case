@@ -8,7 +8,6 @@ help:
 	@echo ' make migrate          run all migration                           '
 	@echo '                                                                   '
 	@echo ' make view-docs        view docs page                              '
-
 	@echo '                                                                   '
 
 up:
