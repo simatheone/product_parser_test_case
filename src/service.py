@@ -100,6 +100,7 @@ class ProductService:
         """
 
         db_product = self.model(**product_data_in)
+        db_product.colors = []
         for color_name in colors:
             color = await self.get_color_by_name(color_name, session)
             if color is None:
@@ -125,6 +126,7 @@ class ProductService:
         Returns:
         - None.
         """
+
         await session.execute(delete(self.model).where(self.model.nm_id == product_id))
         await session.commit()
 
