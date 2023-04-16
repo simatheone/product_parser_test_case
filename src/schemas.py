@@ -60,8 +60,32 @@ class ProductCreate(ProductBase):
 class ProductResponse(ProductBase, ORMMode):
     """Response Product schema."""
 
+    class Config:
+        schema_extra = {
+            'example': {
+                'nm_id': 111,
+                'name': 'Пуловер',
+                'brand': 'Y.O.U',
+                'brand_id': 987,
+                'site_brand_id': 439,
+                'supplier_id': 458,
+                'sale': 0,
+                'price': 105000,
+                'sale_price': 105000,
+                'rating': 0,
+                'feedbacks': 0,
+                'quantity': 0,
+                'colors': [{'color_id': 1, 'name': 'коричневый'}],
+            }
+        }
+
 
 class ProductRequest(BaseModel):
     """Request Product schema."""
 
     nm_id: NonNegativeInt
+
+    class Config:
+        schema_extra = {
+            'example': {'nm_id': 139760619},
+        }
