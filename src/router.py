@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, status
-from fastapi_pagination import Page, Params
+from fastapi_pagination import Page
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.constants import AdditionalResponses
@@ -8,7 +8,7 @@ from src.dependencies import (
     validate_product_exists,
     validate_unique_product,
 )
-from src.schemas import ProductRequest, ProductResponse
+from src.schemas import ProductRequest, ProductResponse, CustomParams
 from src.service import product_service
 from src.utils import get_product_data_from_website
 
@@ -22,7 +22,7 @@ router = APIRouter(
 
 @router.get('/all', response_model=Page[ProductResponse])
 async def get_all_products(
-    params: Params = Depends(),
+    params: CustomParams = Depends(),
     session: AsyncSession = Depends(get_async_session)
 ):
     """Endpoint to retrieve all products from the database."""

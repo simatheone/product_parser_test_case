@@ -1,4 +1,12 @@
+from fastapi import Query
+from fastapi_pagination import Params
 from pydantic import BaseModel, Field, NonNegativeInt
+
+
+class CustomParams(Params):
+    """Custom parameters for all products pagination."""
+
+    size: int = Query(10, ge=1, le=50, description="Page size")
 
 
 class ORMMode(BaseModel):

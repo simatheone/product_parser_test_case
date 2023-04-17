@@ -119,44 +119,86 @@ docker-compose down
 ## Описание ендпоинтов
 
 В проекте доступно 4 ендпоинта:
-- `/products/all/` - получение списка всех продуктов, добавленных в базу данных;
+- `/products/all?page=1&size=10` - получение списка всех продуктов, добавленных в базу данных;
 - `/products/{product_id}/` - получение продукта по его **id**;
 - `/products/{product_id}/` - удаление продукта по его **id**;
 - `/products/` - создание нового продукта.
 
 ---
-`GET /products/all/`
+`GET /products/all?page=1&size=10`
 
-Данный ендпоинт не принимает никаких параметров. Возвращает список всех продуктов, ранее добавленных в базу. Если в базе нет продуктов, вернется пустой список.
+Данный ендпоинт принимает query параметры `page` и `size` для пагинации запроса. 
+Возвращает список всех продуктов, с учетом параметров `page` и `size`. 
 
 **Пример запроса:**
 ```curl
 curl -X 'GET' \
-  'http://localhost:8000/products/all' \
+  'http://localhost:8000/products/all?page=1&size=10' \
   -H 'accept: application/json'
 ```
 
 **Пример ответа:**
 ```json
 {
-  "nm_id": 139760619,
-  "name": "iPhone 14 Pro Max 1TB (США)",
-  "brand": "Apple",
-  "brand_id": 6049,
-  "site_brand_id": 16049,
-  "supplier_id": 887491,
-  "sale": 23,
-  "price": 19999000,
-  "sale_price": 15399200,
-  "rating": 4,
-  "feedbacks": 7,
-  "quantity": 18,
-  "colors": [
+  "items": [
     {
-      "color_id": 1,
-      "name": "серый"
+      "nm_id": 134386495,
+      "name": "Футболка мужская набор 3 шт однотонные хлопок",
+      "brand": "OKO-group",
+      "brand_id": 93472,
+      "site_brand_id": 103472,
+      "supplier_id": 409934,
+      "sale": 42,
+      "price": 231100,
+      "sale_price": 134000,
+      "rating": 5,
+      "feedbacks": 2199,
+      "quantity": 1168,
+      "colors": [
+        {
+          "color_id": 4,
+          "name": "черный"
+        },
+     ]
+    },
+    {
+      "nm_id": 143422254,
+      "name": "Футболка мужская набор 3 шт однотонные хлопок",
+      "brand": "OKO-group",
+      "brand_id": 93472,
+      "site_brand_id": 103472,
+      "supplier_id": 409934,
+      "sale": 40,
+      "price": 231100,
+      "sale_price": 138600,
+      "rating": 5,
+      "feedbacks": 2199,
+      "quantity": 654,
+      "colors": [
+        {
+          "color_id": 4,
+          "name": "черный"
+        }
+      ]
     }
-  ]
+  ],
+  "total": 6,
+  "page": 1,
+  "size": 3,
+  "pages": 2
+}
+```
+
+Если в базе нет продуктов, вернется пустой список.
+
+**Пример ответа:**
+```json
+{
+  "items": [],
+  "total": 0,
+  "page": 1,
+  "size": 10,
+  "pages": 0
 }
 ```
 
