@@ -1,5 +1,7 @@
 from typing import Any, Sequence
 
+from fastapi_pagination import Params
+from fastapi_pagination.ext.sqlalchemy import paginate
 from sqlalchemy import delete, desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
@@ -52,8 +54,8 @@ class ProductService:
         return product_db.scalars().first()
 
     async def get_product_multi(
-        self, session: AsyncSession
-    ) -> Sequence[Product] | None:
+        self, params: Params, session: AsyncSession
+    ) -> Sequence[Product]:
         """Retrieves multiple products from the database.
 
         Args:
@@ -67,7 +69,6 @@ class ProductService:
         - Union[Sequence[Product], None]: A sequence of products if there are any
           in the database, or None if the database is empty.
         """
-
         stmt = (
             select(self.model)
             .options(selectinload(self.model.colors))
@@ -77,8 +78,8 @@ class ProductService:
                 desc(self.model.nm_id),
             )
         )
-        products_db = await session.execute(stmt)
-        return products_db.scalars().all()
+        products_db = await paginate(conn=session, query=stmt, params=params)
+        return products_db
 
     async def create_product(
         self, product_data_in: dict[str, Any], colors: list[str], session: AsyncSession
@@ -98,7 +99,6 @@ class ProductService:
         Returns:
         - ProductCreate: A Pydantic schema representing the newly created product.
         """
-
         db_product = self.model(**product_data_in)
         db_product.colors = []
         for color_name in colors:
@@ -126,7 +126,6 @@ class ProductService:
         Returns:
         - None.
         """
-
         await session.execute(delete(self.model).where(self.model.nm_id == product_id))
         await session.commit()
 
@@ -147,7 +146,6 @@ class ProductService:
         - Union[Color, None]: The color with the specified name if it exists in the
           database, or None if it does not exist.
         """
-
         color = await session.execute(select(Color).where(Color.name == color_name))
         return color.scalars().first()
 

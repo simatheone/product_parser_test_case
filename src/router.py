@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, status
+from fastapi_pagination import Page, Params
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.constants import AdditionalResponses
@@ -19,10 +20,14 @@ router = APIRouter(
 )
 
 
-@router.get('/all', response_model=list[ProductResponse])
-async def get_all_products(session: AsyncSession = Depends(get_async_session)):
+@router.get('/all', response_model=Page[ProductResponse])
+async def get_all_products(
+    params: Params = Depends(),
+    session: AsyncSession = Depends(get_async_session)
+):
     """Endpoint to retrieve all products from the database."""
-    return await product_service.get_product_multi(session)
+    products = await product_service.get_product_multi(params, session)
+    return products
 
 
 @router.get(
