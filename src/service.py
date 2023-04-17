@@ -1,13 +1,12 @@
 from typing import Any, Sequence
 
-# from fastapi_pagination import Params
 from fastapi_pagination.ext.sqlalchemy import paginate
 from sqlalchemy import delete, desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from src.models import Color, Product
-from src.schemas import ProductCreate, CustomParams
+from src.schemas import CustomParams, ProductCreate
 
 
 class ProductService:
@@ -69,13 +68,6 @@ class ProductService:
         - Union[Sequence[Product], None]: A sequence of products if there are any
           in the database, or None if the database is empty.
         """
-        print()
-        print()
-        print()
-        print(params)
-        print()
-        print()
-        print()
         stmt = (
             select(self.model)
             .options(selectinload(self.model.colors))
