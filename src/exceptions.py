@@ -55,3 +55,11 @@ class SomethingWentWrong(DetailedHTTPException):
     """
 
     DETAIL = ErrorCodes.SMTH_WENT_WRONG
+
+
+class JSONKeyNotFound(NotFound):
+    """Exception for the case when a key was not found
+    in fetched json data.
+    """
+
+    DETAIL = ErrorCodes.PRODUCT_JSON_KEY_NOT_FOUND

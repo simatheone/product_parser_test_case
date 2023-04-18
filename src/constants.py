@@ -28,6 +28,10 @@ class ErrorCodes:
     PRODUCT_DOES_NOT_EXIST = 'Product does not exist.'
     PRODUCT_ALREADY_EXISTS = 'Product with this id already exists.'
     SMTH_WENT_WRONG = 'Something went wrong on requesting data from the website.'
+    PRODUCT_JSON_KEY_NOT_FOUND = (
+        'An expected key was not found in response prodcut data or it was renamed. '
+        'Unabled to parse fetched data.'
+    )
 
 
 class AdditionalResponses:
