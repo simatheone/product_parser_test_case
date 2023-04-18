@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+
+  database:
+    image: postgres:14.4-alpine
+    container_name: test_db
+    restart: always
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_test_data:/var/lib/postgres/data
+    environment:
+      - DB_NAME=${DB_NAME-app_test}
+      - POSTGRES_USER=${POSTGRES_USER-app_test}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD-testpostgres}
+
+volumes:
+  postgres_test_data:
