@@ -2,11 +2,11 @@ import pytest
 
 from src.exceptions import JSONKeyNotFound, ProductNotFound, SomethingWentWrong
 from src.utils import (
+    check_fetched_product_data_keys,
     fetch_product_data,
     get_product_data_from_website,
-    parse_fetched_product_data,
-    check_fetched_product_data_keys,
     parse_fetched_product_colors,
+    parse_fetched_product_data,
     parse_fetched_product_quantity,
 )
 
@@ -25,10 +25,7 @@ def test_get_product_data_from_website_no_product(fetch_empty_product_data):
 @pytest.mark.parametrize(
     'product_data, expected_result',
     [
-        (
-            'mock_fetch_product_data_whole_product',
-            'expected_result_product_data'
-        ),
+        ('mock_fetch_product_data_whole_product', 'expected_result_product_data'),
         (
             'mock_fetch_product_data_with_empty_colors',
             'expected_result_product_data_with_empty_colors',
