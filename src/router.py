@@ -8,7 +8,7 @@ from src.dependencies import (
     validate_product_exists,
     validate_unique_product,
 )
-from src.schemas import ProductRequest, ProductResponse, CustomParams
+from src.schemas import CustomParams, ProductRequest, ProductResponse
 from src.service import product_service
 from src.utils import get_product_data_from_website
 
@@ -22,8 +22,7 @@ router = APIRouter(
 
 @router.get('/all', response_model=Page[ProductResponse])
 async def get_all_products(
-    params: CustomParams = Depends(),
-    session: AsyncSession = Depends(get_async_session)
+    params: CustomParams = Depends(), session: AsyncSession = Depends(get_async_session)
 ):
     """Endpoint to retrieve all products from the database."""
     products = await product_service.get_product_multi(params, session)
