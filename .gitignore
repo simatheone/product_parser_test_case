@@ -132,8 +132,5 @@ dmypy.json
 # vscode settings
 .vscode/
 
-# notes
-*.txt
-
 # html files
 *.html
