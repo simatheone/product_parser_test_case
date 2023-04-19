@@ -1,6 +1,6 @@
-from fastapi import status
-import pytest
 import requests
+import pytest
+from fastapi import status
 
 from src import utils
 
@@ -151,7 +151,7 @@ def expected_result_product_data():
             'rating': 5,
             'feedbacks': 2240,
             'quantity': 906,
-        }
+        },
     )
 
 
@@ -239,7 +239,7 @@ def expected_result_product_data_with_empty_sizes():
             'rating': 5,
             'feedbacks': 2240,
             'quantity': 0,
-        }
+        },
     )
 
 
@@ -286,8 +286,8 @@ def expected_result_product_data_with_empty_colors():
             'sale_price': 134000,
             'rating': 5,
             'feedbacks': 2240,
-            'quantity': 263
-        }
+            'quantity': 263,
+        },
     )
 
 
@@ -455,11 +455,7 @@ def mock_fetch_product_data_whole_product(monkeypatch, fetched_whole_product_dat
     def mock_fetch_product_function(*args, **kwargs):
         return fetched_whole_product_data
 
-    monkeypatch.setattr(
-        utils,
-        'fetch_product_data',
-        mock_fetch_product_function
-    )
+    monkeypatch.setattr(utils, 'fetch_product_data', mock_fetch_product_function)
 
 
 @pytest.fixture
@@ -469,11 +465,7 @@ def mock_fetch_product_data_with_empty_colors(
     def mock_fetch_product_function(*args, **kwargs):
         return fetched_product_data_with_empty_colors
 
-    monkeypatch.setattr(
-        utils,
-        'fetch_product_data',
-        mock_fetch_product_function
-    )
+    monkeypatch.setattr(utils, 'fetch_product_data', mock_fetch_product_function)
 
 
 @pytest.fixture
@@ -483,8 +475,4 @@ def mock_fetch_product_data_with_empty_sizes(
     def mock_fetch_product_function(*args, **kwargs):
         return fetched_product_data_with_empty_sizes
 
-    monkeypatch.setattr(
-        utils,
-        'fetch_product_data',
-        mock_fetch_product_function
-    )
+    monkeypatch.setattr(utils, 'fetch_product_data', mock_fetch_product_function)
