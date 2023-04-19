@@ -81,7 +81,10 @@ class ProductService:
         return products_db
 
     async def create_product(
-        self, product_data_in: dict[str, Any], colors: list[str], session: AsyncSession
+        self,
+        product_data_in: dict[str, Any],
+        colors: list[str] | list[None],
+        session: AsyncSession,
     ) -> ProductCreate:
         """Create a new product in the database with the provided data.
 

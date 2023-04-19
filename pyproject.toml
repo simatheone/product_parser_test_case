@@ -44,10 +44,22 @@ extend-exclude = '''
 )/
 '''
 
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+pythonpath = "src/"
+testpaths = "tests/"
+python_files = "test_*.py"
+addopts = "-vv -p no:cacheprovider"
+
+
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
 isort = "^5.12.0"
 flake8 = "^6.0.0"
+pytest = "^7.3.1"
+httpx = "^0.24.0"
+pytest-asyncio = "^0.21.0"
 
 [build-system]
 requires = ["poetry-core"]
