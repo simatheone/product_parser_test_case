@@ -7,6 +7,11 @@
   - [Запуск проекта](#запуск-проекта)
     - [Unix systems](#unix-systems)
     - [Windows](#windows)
+    - [Запуск тестов](#запуск-тестов)
+      - [Linux](#linux)
+      - [Windows](#windows-1)
+      - [Poetry](#poetry)
+      - [VENV](#venv)
   - [Описание ендпоинтов](#описание-ендпоинтов)
 
 ## Задание
@@ -76,7 +81,7 @@ git clone git@github.com:simatheone/product_parser_test_case.git
 cd product_parser_test_case/
 ```
 
-
+#
 ### Unix systems
 3. Выполнить команду по созданию и запуску контейнеров:
 ```shell
@@ -94,13 +99,11 @@ make migrate
 make help
 ```
 
-
+#
 ### Windows
-3. Перейти в директорию `docker`, запустить создание и запуск контейнеров:
+3. Запустить создание и запуск контейнеров:
 ```shell
-cd docker/
-
-docker-compose up -d --build
+docker-compose -f docker/docker-compose.yaml up -d --build
 ```
 4. Выполнить миграции:
 ```shell
@@ -110,10 +113,81 @@ docker-compose exec backend alembic upgrade head
 
 5. Для остановки и удаления контейнеров выполните:
 ```shell
-docker-compose down
+docker-compose -f docker/docker-compose.yaml up -d --build
 ```
 
 [:top: Вернуться к оглавлению](#оглавление)
+
+
+#
+### Запуск тестов
+<details>
+    <summary>Описание по запуску:</summary><br />
+
+**Перед началом установки виртуального окружения и запуска тестов, необходимо запустить контейнер с тестовой базой данных.**
+#### Linux
+Выполнить команду:
+```shell
+make test-up
+```
+
+Для остановки контейнера выполнить:
+```shell
+make test-down
+```
+
+#
+#### Windows
+Выполнить команду:
+```shell
+docker-compose -f docker/docker-compose.tests.yaml up -d --build
+```
+
+Для остановки контейнера выполнить:
+```shell
+docker-compose -f docker/docker-compose.tests.yaml down
+```
+
+---
+
+#### Poetry
+Для запуска тестов выполнить команду:
+```shell
+poetry run pytest
+```
+
+#### VENV
+1. Установить виртуальное окружение:
+```shell
+python3 -m venv venv
+```
+
+2. Активировать виртуальное окружение:
+```
+Unix like:
+source venv/bin/activate
+
+Windows:
+venv\Scripts\activate.bat
+```
+
+3. Обновить `pip` и установить зависимости:
+```shell
+pip3 install --upgrade pip
+
+pip3 install -r requirements.txt
+```
+
+4. Запустить тесты:
+```shell
+pytest
+```
+
+[:top: Вернуться к оглавлению](#оглавление)
+
+</details>
+
+
 
 #
 ## Описание ендпоинтов
@@ -127,8 +201,8 @@ docker-compose down
 ---
 `GET /products/all?page=1&size=10`
 
-Данный ендпоинт принимает query параметры `page` и `size` для пагинации запроса. 
-Возвращает список всех продуктов, с учетом параметров `page` и `size`. 
+Данный ендпоинт принимает query параметры `page` и `size` для пагинации запроса.
+Возвращает список всех продуктов, с учетом параметров `page` и `size`.
 
 **Пример запроса:**
 ```curl
