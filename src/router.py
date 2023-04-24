@@ -25,8 +25,7 @@ async def get_all_products(
     params: CustomParams = Depends(), session: AsyncSession = Depends(get_async_session)
 ):
     """Endpoint to retrieve all products from the database."""
-    products = await product_service.get_product_multi(params, session)
-    return products
+    return await product_service.get_product_multi(params, session)
 
 
 @router.get(
@@ -79,5 +78,4 @@ async def delete_product(
 
     - **product_id** (int): The ID of the product to be deleted (path parameter).
     """
-    await product_service.remove_product(product_id, session)
-    return
+    return await product_service.remove_product(product_id, session)
